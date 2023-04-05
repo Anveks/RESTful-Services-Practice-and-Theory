@@ -1,0 +1,12 @@
+{
+  "name": "restful-services-practice-and-theory",
+  "version": "1.0.0",
+  "description": "RESTful Services Practice and Theory",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
