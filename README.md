@@ -18,12 +18,21 @@ What exactly is HTTP Request and what is its format? It is a document that consi
 1. Method (type of action: GET, POST, DELETE, etc)
 2. Page (the URL address of a page/path)
 3. HTTP Version
-4. HTTP Headers (follow-up data of a request)
+4. HTTP Headers (follow-up data of a request: host, authorization, user-agent)
 5. HTTP Request Body (main data of a request)
 
 What is HTTP Response and its format?
 1. HTTP Version 
-2. HTTP Status Code (special code for an event - success, failure, etc.)
+2. HTTP Status Code (special code for an event - success(200, 201), failure(401, 404), etc.)
 3. HTTP Status Text (text explaining the status code)
-4. HTTP Response Headers (follow-up data of a response)
-5. HTTP Response Body (main data of a response)
+4. HTTP Response Headers (follow-up data of a response: name of a server, date, content-type)
+5. HTTP Response Body (main data of a response: usually an html-document)
+
+# HTTP Status Codes:
+- 1xx Informational Status
+- 2xx Success Status
+- 3xx Redirection Status
+- 4xx Client Error
+- 5xx Server Error
+
+# REST Architecture
