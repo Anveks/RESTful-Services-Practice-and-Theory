@@ -47,3 +47,20 @@ What is HTTP Response and its format?
 REST and HTTP: REST is build on top of HTTP protocol. The data sent and received is placed inside the HTTP documents. The difference is: in case of REST Request/REST Response the data will be presented in .json format, and not as an html document.
 
 REST APIs have more common methods than HTTP: apart from GET and POST, there are also PUT (update), PATCH (update partially), DELETE.
+
+# Ways to build a Web Server
+
+There are several ways for building your own Server: starting with basic built-in Node.js module called "http", up to more popular libraries like Express. To install the latter one simply run - npm i express - in the terminal (plus npm i @types/express in case of TypeScript). If TS wont see express import as a default, add the following configuraion in your tsconfig.json file:
+            "esModuleInterop": true",
+
+
+The default method will always be GET. When you want to check other methods the best way is to download Postman and try the URL's there.
+
+# # Multi-layered concept
+
+So usually when building a Server you would want to follow a certain logic (or scheme). One of the most popular ones is the so-called "multi-layered" scheme, consisting of six layers connecting frontend with database:
+
+1. Controllers - JS/TS files settling the connection between requests, routes and data-providing functions. 
+2. Business Logic - layer that deals with all the operations on data.
+3. Data Access Layer (DAL) - the layer that has direct access to the database.
+4. Database - outer layer that stores the data.
