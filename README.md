@@ -15,7 +15,7 @@
 - it is the browser that creates HTTP requests and sends them to the Server.
 
 What exactly is HTTP Request and what is its format? It is a document that consists of five parts: 
-1. Method (type of action: GET, POST, DELETE, etc)
+1. Method (type of action: just GET and POST)
 2. Page (the URL address of a page/path)
 3. HTTP Version
 4. HTTP Headers (follow-up data of a request: host, authorization, user-agent)
@@ -36,3 +36,14 @@ What is HTTP Response and its format?
 - 5xx Server Error
 
 # REST Architecture
+- Representational State Transfer.
+- Popular software architecure for creating Web Services.
+- Transfers tables or collections (called resources) through URLs.
+- Uses HTTP protocol for sending and receiving data.
+- Does not deal with implementation, only design guidelines (meaning you can build in with any backeng language if you follow the rules)
+- Developed by Roy Fielding in 2000
+- ANy Web Service implemented by REST guidelines is called RESTful Service or REST API
+
+REST and HTTP: REST is build on top of HTTP protocol. The data sent and received is placed inside the HTTP documents. The difference is: in case of REST Request/REST Response the data will be presented in .json format, and not as an html document.
+
+REST APIs have more common methods than HTTP: apart from GET and POST, there are also PUT (update), PATCH (update partially), DELETE.
