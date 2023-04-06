@@ -60,6 +60,8 @@ The default method will always be GET. When you want to check other methods the 
 
 So usually when building a Server you would want to follow a certain logic (or scheme). One of the most popular ones is the so-called "multi-layered" scheme, consisting of six layers connecting frontend with database:
 
+![Screenshot](scheme-api.png)
+
 1. Controllers - JS/TS files settling the connection between requests, routes and data-providing functions. 
 2. Business Logic - layer that deals with all the operations on data.
 3. Data Access Layer (DAL) - the layer that has direct access to the database.
