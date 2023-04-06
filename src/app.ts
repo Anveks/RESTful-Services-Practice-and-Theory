@@ -1,8 +1,10 @@
-import express from 'express';
-import booksController from './5-controllers-layer/books-controller';
 import dotenv from "dotenv";
+import express from 'express';
+import logger from './1-middleware/logger';
 import tester from './1-middleware/tester';
-import tester2 from './1-middleware/tester-two'
+import booksController from './5-controllers-layer/books-controller';
+import queryStringBlocker from "./1-middleware/query-string-blocker";
+import errorsHandler from "./1-middleware/errors-handler";
 
 if (process.env.NODE_ENV === "production") {
   global.config = require("../config.json").production;
@@ -14,12 +16,12 @@ dotenv.config();
 
 const server = express(); // express is a function 
 
-// server.use(tester); // pre-route
-// server.use(tester2); // pre-route
+server.use(logger);
+server.use(queryStringBlocker);
+server.use(tester); // pre-route middleware
 
 server.use(booksController); // use is a middleware function that tells the server which controller/s to use.
 
-server.use(tester); // pre-route
-server.use(tester2); // pre-route
+server.use(errorsHandler); 
 
 server.listen(process.env.PORT, () =>  console.log(`Listening on http://localhost:${process.env.PORT}`)); // starting the server

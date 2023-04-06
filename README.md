@@ -92,7 +92,7 @@ Query strings are useful when you have several parameters to send in the request
 
 # Middleware and Routes
 
-Middleware are functions executed automatically in between requests and responses. They are always placed inside the routes. Basically all the middleware are invoked twice - upon request and upon response. Each middleware has next() function that allows switching to the next middleware or any other function in the line.
+Middleware are functions executed automatically between client requests and server responses. They are always placed inside the routes. Basically all the middleware are invoked twice - upon request and upon response. Each middleware has next() function that allows switching to the next middleware or any other function in the line.
 
 ![Screenshot](./img/middleware.png)
 
@@ -120,3 +120,9 @@ Pre-route is ones that are defined before the routes, but where do we write the 
 ![Screenshot](./img/post-middleware.png)
 
 So here instead of getting a response inside a route, we transfer the result to the next middleware and to the final middleware that will return the response. It is not such a good practice, as it can increase the complexity of the code and make it harder to maintain. It is generally better to handle all necessary tasks within the main request handler and only use post-middleware when it is necessary.
+
+# Blocking and Non-blocking Middleware
+
+Blocking middleware is a type of middleware that stops the execution of subsequent middleware and the request-response cycle until the current middleware has completed its task. This means that the server will not respond to any other requests until the current middleware has finished processing. Examples: IP-addresses from "the black list", other countries, "under construction" parts of sites, etc.
+
+Non-blocking middleware, on the other hand, allows the request-response cycle to continue to execute while the middleware is processing. It does not stop the execution of subsequent middleware or the request-response cycle. Instead, it can pass control to the next middleware in the stack while it is still processing the current request. This approach is also known as "next() middleware" since the middleware function calls the next middleware in the stack before completing its task. Classic example: logger, error-logger.
