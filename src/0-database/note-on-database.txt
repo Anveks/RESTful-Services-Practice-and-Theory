@@ -1,0 +1,1 @@
+In real-life projects we do not have such file as "database", of course. The first layer (and the closest one to the data) will be Data Access Layer. Databases exist apart from servers.

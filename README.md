@@ -60,9 +60,38 @@ The default method will always be GET. When you want to check other methods the 
 
 So usually when building a Server you would want to follow a certain logic (or scheme). One of the most popular ones is the so-called "multi-layered" scheme, consisting of six layers connecting frontend with database:
 
-![Screenshot](scheme-api.png)
+![Screenshot](./img/scheme-api.png)
 
 1. Controllers - JS/TS files settling the connection between requests, routes and data-providing functions. 
 2. Business Logic - layer that deals with all the operations on data.
 3. Data Access Layer (DAL) - the layer that has direct access to the database.
 4. Database - outer layer that stores the data.
+
+# Small note on Environmental Variables
+
+Environmental variables are a set of global dynamic values that provide a flexible way to configure and manage various system settings, such as ports, API keys, paths to executable files, the location of system libraries, or configuration parameters for an application, etc.
+
+Environmental variables are typically stored in a ROOT file called .env . However, in order to use env variables, you should follow these steps: 
+
+- install npm i dotenv.
+- import it at the top of the main server file (as dotenv)
+- call dotenv.config() function.
+- use the env variables by typing process.env.NAME (where name is the key of an env variable).
+
+In summary, .env files are typically used to store sensitive information that should not be exposed publicly, while config.json files are used to store application configuration data that may be shared across multiple environments.
+
+# Small note on Query Strings
+
+A query string is a part of a URL that contains data that the client (usually a web browser) sends to the server. It's a string of key-value pairs separated by an ampersand (&) and appended to the end of a URL after a question mark (?).
+
+    http://localhost:3001/api/books/cheaper-than/15 - regular URL
+
+    http://localhost:3001/api/books/cheaper-than?price=7&color=blue/ - query string
+
+Query strings are useful when you have several parameters to send in the request. When you want to acces the data passed in a query string, simply use request.query.key-name.
+
+# Middleware and Routes
+
+Middleware are functions executed automatically in between requests and responses. They are always placed inside the routes. Basically all the middleware are invoked twice - upon request and upon response. Each middleware has next() function that allows switching to the next middleware or any other function in the line.
+
+![Screenshot](./img/middleware.png)

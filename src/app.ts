@@ -1,11 +1,20 @@
-import express, { Request, Response } from 'express';
+import express from 'express';
+import booksController from './5-controllers-layer/books-controller';
+import dotenv from "dotenv";
+import tester from './1-middleware/tester';
+
+if (process.env.NODE_ENV === "production") {
+  global.config = require("../config.json").production;
+} else {
+  global.config = require("../config.json").development;
+}
+
+dotenv.config();
 
 const server = express(); // express is a function 
 
-// defining GET method + route + response
-server.get("/api/books", (request: Request, response: Response) => {
-  console.log("Client gets API Books."); // http://localhost:3001/api/books
-  response.json([{id: 1, name: "C++"}, {id: 2, name: "Java"}, {id: 3, name: "PHP"}]); // data returned is already in json format
-});
+server.use(tester);
 
-server.listen(3001, () =>  console.log("Listening...")); // starting the server
+server.use(booksController); // use is a middleware function that tells the server which controller/s to use.
+
+server.listen(process.env.PORT, () =>  console.log(`Listening on http://localhost:${process.env.PORT}`)); // starting the server

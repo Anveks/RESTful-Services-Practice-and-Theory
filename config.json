@@ -1,0 +1,14 @@
+{
+  "development":{
+     "database": {
+       "file": "./src/0-database/books.json"
+   }
+  },
+
+  "production": {
+    "database": {
+      "file": "./src/0-database/production/books.json"
+     }
+  }
+
+}
