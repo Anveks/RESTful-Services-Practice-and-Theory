@@ -51,12 +51,12 @@ REST APIs have more common methods than HTTP: apart from GET and POST, there are
 # Ways to build a Web Server
 
 There are several ways for building your own Server: starting with basic built-in Node.js module called "http", up to more popular libraries like Express. To install the latter one simply run - npm i express - in the terminal (plus npm i @types/express in case of TypeScript). If TS wont see express import as a default, add the following configuraion in your tsconfig.json file:
-            "esModuleInterop": true",
 
+            "esModuleInterop": true"
 
 The default method will always be GET. When you want to check other methods the best way is to download Postman and try the URL's there.
 
-# # Multi-layered concept
+# Multi-layered concept
 
 So usually when building a Server you would want to follow a certain logic (or scheme). One of the most popular ones is the so-called "multi-layered" scheme, consisting of six layers connecting frontend with database:
 
@@ -95,3 +95,28 @@ Query strings are useful when you have several parameters to send in the request
 Middleware are functions executed automatically in between requests and responses. They are always placed inside the routes. Basically all the middleware are invoked twice - upon request and upon response. Each middleware has next() function that allows switching to the next middleware or any other function in the line.
 
 ![Screenshot](./img/middleware.png)
+
+It is important where you use middleware. If you put it right after initializing the server on the app-level (const server = express()) then all the route-controllers after will go through the middleware:
+
+    const server = express(); 
+    server.use(middleware-name);
+
+In case you want a middleware only on one specific route-controller, you should define it after initializing the route: 
+
+    const router = express.Router();
+    router.use(middleware-name);
+
+For even more specific cases of middleware usage - only per certain routes - you can call them right inside the routes: 
+
+    router.get("/api/books", [middleware-name], async (request: Request, response: Response) => {
+        const books = await logic.getAllBooksAsync();
+        response.json(books); in json format
+    });
+
+# Pre-route and Post-route Middleware
+
+Pre-route is ones that are defined before the routes, but where do we write the post-ones? In the next() function. NextFunction-s can be used inside the routes, right after request and response agruments.
+
+![Screenshot](./img/post-middleware.png)
+
+So here instead of getting a response inside a route, we transfer the result to the next middleware and to the final middleware that will return the response. It is not such a good practice, as it can increase the complexity of the code and make it harder to maintain. It is generally better to handle all necessary tasks within the main request handler and only use post-middleware when it is necessary.
