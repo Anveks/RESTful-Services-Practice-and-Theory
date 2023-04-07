@@ -7,18 +7,20 @@ const router = express.Router();
 // http://localhost:3001/api/books
 router.get("/api/books", async (request: Request, response: Response, next: NextFunction) => {
 
-    // error handling demo:
-    if (Math.random() < 0.5) {
-      throw new Error("Something went wrong...")
-    }
-
-    const books = await logic.getAllBooksAsync();
-    response.json(books); // data returned is already in json format
+  try {
+      // error handling demo:
+      if (Math.random() < 0.5) throw new Error("Something went wrong...");
+  
+      const books = await logic.getAllBooksAsync();
+      response.json(books); // data returned is already in json format
+  } catch (err: any) {
+    next(err);
+  }
 
 });
 
 router.get("/api/books/:id", async (request: Request, response: Response, next: NextFunction) => {
-  
+
   // validation + error handling demo:
   const id = +request.params.id;
   if(id <= 0) {

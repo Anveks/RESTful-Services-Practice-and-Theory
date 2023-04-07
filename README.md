@@ -126,3 +126,43 @@ So here instead of getting a response inside a route, we transfer the result to 
 Blocking middleware is a type of middleware that stops the execution of subsequent middleware and the request-response cycle until the current middleware has completed its task. This means that the server will not respond to any other requests until the current middleware has finished processing. Examples: IP-addresses from "the black list", other countries, "under construction" parts of sites, etc.
 
 Non-blocking middleware, on the other hand, allows the request-response cycle to continue to execute while the middleware is processing. It does not stop the execution of subsequent middleware or the request-response cycle. Instead, it can pass control to the next middleware in the stack while it is still processing the current request. This approach is also known as "next() middleware" since the middleware function calls the next middleware in the stack before completing its task. Classic example: logger, error-logger.
+
+# Error Handling and Error Handling Middleware
+
+Error handling middleware is a little different from the regular ones: instead of 3 agruments (request, response, next) this type of middleware gets an additional one: error (of type "any" or Error in case of TypeScript). 
+
+        function errorsHandler(err: any, request: Request, response: Response, next: NextFunction) {
+            //
+        }
+
+The application checks how many agruments the next middleware has, and if there are four - send the errror message/error object to this function.
+
+Catch-all middleware is a middleware that catches all types of errors: both objects and strings. Example:
+
+        function errorsHandler(err: any, request: Request, response: Response, next: NextFunction) {
+
+            // case of Error object:
+            if (err instanceof Error) {
+                response.status(500).send(err.message);
+                return;
+            } 
+
+            // case of any other type of error:
+            if (typeof err === 'string') {
+                response.status(500).send(err);
+                return;
+            }
+
+            next();
+        }
+
+Tip: you can also create custom ErrorModel class, that will deal with displaying all needed error.statuses and error.messages:
+
+            // case of custom ErrorModel:
+            if(err instanceof ErrorModel) {
+                response.status(err.status).send(err.message);
+            }
+
+In summary, error handling middleware is used to handle specific types of errors, while catch-all middleware is used to handle all other errors that were not handled by other middleware functions.        
+
+NB: In case you write asynchonous code, don't forget to wrap your functions in try-catch, otherwise the whole app will freeze.
