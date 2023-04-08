@@ -166,3 +166,11 @@ Tip: you can also create custom ErrorModel class, that will deal with displaying
 In summary, error handling middleware is used to handle specific types of errors, while catch-all middleware is used to handle all other errors that were not handled by other middleware functions.        
 
 NB: In case you write asynchonous code, don't forget to wrap your functions in try-catch, otherwise the whole app will freeze.
+
+# JOI Validations
+
+Joi is a popular validation library for JavaScript and Node.js applications. It provides a simple and declarative way to validate various types of data such as strings, numbers, arrays, objects, and more. 
+
+        npm i joi
+        npm i @types/joi
+

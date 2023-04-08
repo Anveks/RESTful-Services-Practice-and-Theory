@@ -86,3 +86,21 @@ Time: 07/04/2023, 13:17:20, Method: GET, URL: /api/boo
  -------------------------- 
 Time: 07/04/2023, 13:19:43, Method: GET, URL: /api/boo 
  -------------------------- 
+Time: 08/04/2023, 11:51:54, Method: GET, URL: /api/books/:4 
+ -------------------------- 
+Time: 08/04/2023, 11:52:01, Method: GET, URL: /api/books/4 
+ -------------------------- 
+Time: 08/04/2023, 11:52:07, Method: DELETE, URL: /api/books/4 
+ -------------------------- 
+Time: 08/04/2023, 11:52:15, Method: GET, URL: /api/books 
+ -------------------------- 
+Time: 08/04/2023, 11:53:27, Method: DELETE, URL: /api/books/89 
+ -------------------------- 
+Time: 08/04/2023, 11:56:32, Method: DELETE, URL: /api/books/89 
+ -------------------------- 
+Time: 08/04/2023, 11:56:34, Method: DELETE, URL: /api/books/89 
+ -------------------------- 
+Time: 08/04/2023, 11:57:03, Method: DELETE, URL: /api/books/89 
+ -------------------------- 
+Time: 08/04/2023, 12:02:26, Method: GET, URL: /api/books/89 
+ -------------------------- 

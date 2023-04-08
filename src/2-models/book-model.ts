@@ -1,3 +1,5 @@
+import Joi from "joi";
+
 export class BookModel {
   public id: number;
   public name: string;
@@ -6,6 +8,16 @@ export class BookModel {
   public constructor(book: BookModel){ // here we use Copy-Constructor* concept 
     this.id = book.id;
     this.name = book.name;
+  }
+
+  private static postValidationSchema = Joi.object({
+    id: Joi.forbidden(),
+    name: Joi.string().required().min(2).max(50),
+  });
+
+  public validatePost() {
+    const result = BookModel.postValidationSchema.validate(this, { abortEarly: false }); // aabortEarly means not to stop checking after the first err found; helps to see all the validation errors
+    return result.error?.message;
   }
 }
 
